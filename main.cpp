@@ -83,11 +83,11 @@ int main() {
             }
 
 
-            if (IsKeyPressed(KEY_UP) && menuIndex != 0)
+            if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W))&& menuIndex != 0)
             {
                 menuIndex--;
             }
-            if (IsKeyPressed(KEY_DOWN) && menuIndex != 1)
+            if ((IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) && menuIndex != 1)
             {
                 menuIndex++;
             }
