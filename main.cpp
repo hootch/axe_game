@@ -49,25 +49,69 @@ int main() {
                         );
 
 
-
-
+    bool mainMenu = true;
+    std::string menuArr[2] {"start", "exit"};
+    int menuIndex = 0;
 
     while (run) {
         BeginDrawing();
         // printf("FPS: %i\n", GetFPS());
         ClearBackground(BLACK);
 
+
         if (IsKeyDown(KEY_ESCAPE))
         {
             run = false;
         }
+        if (mainMenu || collision_with_axe) {
+
+            if (collision_with_axe) {
+                DrawText("Game Over", width/2,height/3,20,RED);
+            }
+            else
+            {
+                DrawText("Main Menu", width/2,height/3 ,20,WHITE);
+            }
+            if (menuIndex == 0) {
+                DrawText(menuArr[0].c_str(), width/2,height/3 + 60,20,GREEN);
+                DrawText(menuArr[1].c_str(), width/2,height/3  +120,20,RED);
+            }
+            else
+            {
+                DrawText(menuArr[0].c_str(), width/2,height/3 + 60,20,RED);
+                DrawText(menuArr[1].c_str(), width/2,height/3  +120,20,GREEN);
+            }
 
 
-        if (collision_with_axe)
-        {
-            DrawText("Game Over", width/2,height/2,20,RED);
+            if (IsKeyPressed(KEY_UP) && menuIndex != 0)
+            {
+                menuIndex--;
+            }
+            if (IsKeyPressed(KEY_DOWN) && menuIndex != 1)
+            {
+                menuIndex++;
+            }
+            if (IsKeyPressed(KEY_SPACE))
+            {
+                switch (menuIndex) {
+                    case 0:
+                        collision_with_axe = false;
+                        mainMenu = false;
+                        circleX = 200;
+                        circleY = 200;
+                        break;
+                    case 1:
+                        run = false;
+                    default: ;
+                }
+            }
 
         }
+        // else if (collision_with_axe)
+        // {
+        //     DrawText("Game Over", width/2,height/2,20,RED);
+        //
+        // }
         else
         {
 
